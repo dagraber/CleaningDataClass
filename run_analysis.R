@@ -1,10 +1,13 @@
 #Course Project
 
+# features.txt contains 561 variable labels for columns
 # X_test.txt contains 2947 obersvations of 561 variables
 # Y_test.txt contains 2947 test labels corresponding to activity types
-# features.txt contains 561 variable labels for columns
-# subject_test.txt contains 2947 subject identifier numbers
-# body_acc_x_test.txt containt 2947 observations of 128 variables
+# subject_test.txt contains 2947 test subject identifier numbers
+# X_train.txt contains 7352 observations of 561 variables
+# Y_train.txt contains 7352 training labels corresponding to activity types
+# subject_train.txt contains 7352 training subject identifier numbers
+
 
 featfile <- "features.txt"
 actlabels <- "activity_labels.txt"
@@ -14,18 +17,6 @@ testSubfile <- "./test/subject_test.txt"
 trainXfile <- "./train/X_train.txt"
 trainYfile <- "./train/Y_train.txt"
 trainSubfile <- "./train/subject_train.txt"
-
-#testAccXfile <- "./test/Inertial Signals/body_acc_x_test.txt"
-#testAccYfile <- "./test/Inertial Signals/body_acc_y_test.txt"
-#testAccZfile <- "./test/Inertial Signals/body_acc_z_test.txt"
-#testGyroXfile <- "./test/Inertial Signals/body_gyro_x_test.txt"
-#testGyroYfile <- "./test/Inertial Signals/body_gyro_y_test.txt"
-#testGyroZfile <- "./test/Inertial Signals/body_gyro_z_test.txt"
-#testTotXfile <- "./test/Inertial Signals/total_acc_x_test.txt"
-#testTotYfile <- "./test/Inertial Signals/total_acc_y_test.txt"
-#testTotZfile <- "./test/Inertial Signals/total_acc_y_test.txt"
-
-#flist <- list(testXfile,testYfile,testSubFile,testAccXfile,testAccYfile,testAccZfile,testGyroXfile,testGyroYfile, testGyroZfile, testTotXfile, testTotYfile, testTotZfile)
 
 featnames <- read.table(featfile, header = FALSE)
 
@@ -55,10 +46,6 @@ merged <- rbind.data.frame(testX,trainX)
 Mini <- merged[,grep("mean|std|subject|activity",colnames(merged) )]
 #81 columns remain
 
-#add subject and activity columns to subset:
-#testMini[,"subject"] <- testSub
-#testMini[,"activity"] <- testY
-
 #add activity descriptive labels to subset:
 actnames <- read.table(actlabels, header = FALSE)
 colnames(actnames) <- c("activity", "activity_description")
@@ -76,5 +63,5 @@ names(ActMeans)[names(ActMeans)=="Group.1"] <- "activity_group"
 write.csv(merged, file = "tidydata.csv")
 # MiniMeans has 180 observations of 84 variables
 write.csv(MiniMeans, file = "summary.csv")
-
+# ActMeans has 6 observations of 83 variables- one row for each activity
 write.csv(ActMeans, file = "activitysummary.csv")

@@ -60,6 +60,7 @@ names(ActMeans)[names(ActMeans)=="Group.1"] <- "activity_group"
 
 #output to .csv:
 # merged has 10299 observations of 563 variables
+write.table(merged, file = "tidydata.txt", row.names = FALSE) #because class specifies .txt file
 write.csv(merged, file = "tidydata.csv")
 # MiniMeans has 180 observations of 84 variables
 write.csv(MiniMeans, file = "summary.csv")
